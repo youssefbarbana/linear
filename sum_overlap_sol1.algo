@@ -1,0 +1,25 @@
+ALGORITHM sum_overlapp_sol1
+VAR
+    set1 : ARRAY_OF INTEGER[];
+    set2 : ARRAY_OF INTEGER[];
+    i,j,n,m,ov : INTEGER;
+    sum : INTEGER := 0;
+BEGIN
+    Write("First Set length");
+    Read (n);
+
+    Write("Second Set length");
+    Read(m);
+
+    FOR i FROM 0 TO n-1 STEP 1 DO
+        WHILE (j < m && set1[i] <> set2[j]) DO
+            j++;
+        END_WHILE
+        IF (set1[i] == set2[j]) THEN
+                sum := sum + set1[i]*2;;
+        END_IF
+    END_FOR
+
+    Write("the sum of overlap elements is ",sum);
+
+END

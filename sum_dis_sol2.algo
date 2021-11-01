@@ -1,0 +1,48 @@
+ALGORITHM sum_dist_sol2
+VAR
+    set1 : ARRAY_OF INTEGER[];
+    set2 : ARRAY_OF INTEGER[];
+    htab : HASH_TABLE<INTEGER,INTEGER>
+    sum : INTEGER := 0;
+    count : INTEGER := 0;
+    n,m,i : INTEGER
+BEGIN
+
+    Write("First Set length");
+    Read(n);
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        Read (set1[i]);
+    END_FOR
+
+    Write("Second Set length");
+    Read(m);
+    FOR i FROM 0 TO m-1 STEP 1  DO
+        Read (set2[i]);
+    END_FOR
+
+    FOR i FROM 0 TO n-1 STEP 1 DO {
+        if(htab.lookup(set1[i]) == TRUE) {
+            count = htab.get(set1[i]);
+            htab.insert(set1[i], count+1);
+        }else
+            htab.insert(set1[i], 1);
+    }
+
+    FOR i FROM 0 TO m-1 STEP 1 DO {   
+        if(htab.lookup(set2[i])) {
+            count = map.get(set2[i]);
+            htab.insert(set2[i], count+1);
+        }else
+            htab.insert(set2[i], 1);
+    }
+
+    //get sum of distinct elements
+    Set<Integer> set = htab.keySet();
+    Iterator<Integer> iterator = set.iterator();
+    while (iterator.hasNext()){
+        int key = iterator.next();
+        if(map.get(key)==1)
+            sum +=  key;
+    }
+    System.out.println("The sum of all distint elements using Hash Table is : " + sum);
+END
